@@ -11,120 +11,174 @@ namespace Xbox360Pad
     public sealed class Pad
     {
 
-        private static Controller csPad = new Controller(0);
+        private static Controller[] csPad = new Controller[4];
+        private static int controllers = 0;
 
-        public static bool isControllerConnected()
+        public static int initControllers()
         {
-            return csPad.IsConnected;
-        }
-
-        public static bool isPressed(string button)
-        {
-            int bFlag = 0;
-            if (csPad.IsConnected)
+            for (int i = 0; i < 4; i++)
             {
-                switch (button)
-                {
-                    case "A":
-                        bFlag = 0x1000;
-                        break;
-                    case "B":
-                        bFlag = 0x2000;
-                        break;
-                    case "X":
-                        bFlag = 0x4000;
-                        break;
-                    case "Y":
-                        bFlag = 0x8000;
-                        break;
-                    case "DPadUp":
-                        bFlag = 0x1;
-                        break;
-                    case "DPadDown":
-                        bFlag = 0x2;
-                        break;
-                    case "DPadLeft":
-                        bFlag = 0x4;
-                        break;
-                    case "DPadRight":
-                        bFlag = 0x8;
-                        break;
-                    case "Start":
-                        bFlag = 0x10;
-                        break;
-                    case "Back":
-                        bFlag = 0x20;
-                        break;
-                    case "LeftClick":
-                        bFlag = 0x40;
-                        break;
-                    case "RightClick":
-                        bFlag = 0x80;
-                        break;
-                    case "LeftBumper":
-                        bFlag = 0x100;
-                        break;
-                    case "RightBumper":
-                        bFlag = 0x200;
-                        break;
-                }
-                State csState = csPad.GetState();
-                GamepadButtonFlags flags = csState.Gamepad.Buttons;
-                if (((int)flags & bFlag) >= 1)
-                    return true;
-                else return false;
+                csPad[i] = new Controller((UserIndex)i);
+                if(csPad[i].IsConnected) controllers++;
             }
-            else return false;
+            return controllers;
         }
 
-        public static byte getLeftTrigger()
+        public static bool[] isPressed(string button)
         {
-            State csState = csPad.GetState();
-            return csState.Gamepad.LeftTrigger;
+            int[] bFlag = new int[4];
+            GamepadButtonFlags[] flags = new GamepadButtonFlags[4];
+            State[] csState = new State[4];
+            bool[] pressed = new bool[4];
+            for (int i = 0; i < controllers; i++)
+            {
+                if (csPad[i].IsConnected)
+                {
+                    switch (button)
+                    {
+                        case "A":
+                            bFlag[i] = 0x1000;
+                            break;
+                        case "B":
+                            bFlag[i] = 0x2000;
+                            break;
+                        case "X":
+                            bFlag[i] = 0x4000;
+                            break;
+                        case "Y":
+                            bFlag[i] = 0x8000;
+                            break;
+                        case "DPadUp":
+                            bFlag[i] = 0x1;
+                            break;
+                        case "DPadDown":
+                            bFlag[i] = 0x2;
+                            break;
+                        case "DPadLeft":
+                            bFlag[i] = 0x4;
+                            break;
+                        case "DPadRight":
+                            bFlag[i] = 0x8;
+                            break;
+                        case "Start":
+                            bFlag[i] = 0x10;
+                            break;
+                        case "Back":
+                            bFlag[i] = 0x20;
+                            break;
+                        case "LeftClick":
+                            bFlag[i] = 0x40;
+                            break;
+                        case "RightClick":
+                            bFlag[i] = 0x80;
+                            break;
+                        case "LeftBumper":
+                            bFlag[i] = 0x100;
+                            break;
+                        case "RightBumper":
+                            bFlag[i] = 0x200;
+                            break;
+                    }
+                    csState[i] = csPad[i].GetState();
+                    flags[i] = csState[i].Gamepad.Buttons;
+                    if (((int)flags[i] & bFlag[i]) >= 1)
+                        pressed[i] = true;
+                    else pressed[i] = false;
+                }
+            }
+            return pressed; // We should never reach this point.
         }
 
-        public static byte getRightTrigger()
+        public static byte[] getLeftTrigger()
         {
-            State csState = csPad.GetState();
-            return csState.Gamepad.RightTrigger;
+            State[] csState = new State[4];
+            byte[] triggerState = new byte[4];
+            for (int i = 0; i < controllers; i++)
+            {
+                csState[i] = csPad[i].GetState();
+                triggerState[i] = csState[i].Gamepad.LeftTrigger;
+            }
+            return triggerState;
         }
 
-        public static short getLStickX()
+        public static byte[] getRightTrigger()
         {
-            State csState = csPad.GetState();
-            return csState.Gamepad.LeftThumbX;
+            State[] csState = new State[4];
+            byte[] triggerState = new byte[4];
+            for (int i = 0; i < controllers; i++)
+            {
+                csState[i] = csPad[i].GetState();
+                triggerState[i] = csState[i].Gamepad.RightTrigger;
+            }
+            return triggerState;
         }
 
-        public static short getLStickY()
+        public static short[] getLStickX()
         {
-            State csState = csPad.GetState();
-            return csState.Gamepad.LeftThumbY;
+            State[] csState = new State[4];
+            short[] LXState = new short[4];
+            for (int i = 0; i < controllers; i++)
+            {
+                csState[i] = csPad[i].GetState();
+                LXState[i] = csState[i].Gamepad.LeftThumbX;
+            }
+            return LXState;
         }
 
-        public static short getRStickX()
+        public static short[] getLStickY()
         {
-            State csState = csPad.GetState();
-            return csState.Gamepad.RightThumbX;
+            State[] csState = new State[4];
+            short[] LYState = new short[4];
+            for (int i = 0; i < controllers; i++)
+            {
+                csState[i] = csPad[i].GetState();
+                LYState[i] = csState[i].Gamepad.LeftThumbY;
+            }
+            return LYState;
         }
 
-        public static short getRStickY()
+        public static short[] getRStickX()
         {
-            State csState = csPad.GetState();
-            return csState.Gamepad.RightThumbY;
+            State[] csState = new State[4];
+            short[] RXState = new short[4];
+            for (int i = 0; i < controllers; i++)
+            {
+                csState[i] = csPad[i].GetState();
+                RXState[i] = csState[i].Gamepad.RightThumbX;
+            }
+            return RXState;
+        }
+
+        public static short[] getRStickY()
+        {
+            State[] csState = new State[4];
+            short[] RYState = new short[4];
+            for (int i = 0; i < controllers; i++)
+            {
+                csState[i] = csPad[i].GetState();
+                RYState[i] = csState[i].Gamepad.RightThumbY;
+            }
+            return RYState;
         }
 
         public static void setLeftVibrate(ushort speed)
         {
-            Vibration lVibe = new Vibration();
-            lVibe.LeftMotorSpeed = speed;
-            csPad.SetVibration(lVibe);
+            Vibration[] lVibe = new Vibration[4];
+            for (int i = 0; i < controllers; i++)
+            {
+                lVibe[i].LeftMotorSpeed = speed;
+                csPad[i].SetVibration(lVibe[i]);
+            }
         }
 
         public static void setRightVibrate(ushort speed)
         {
-            Vibration rVibe = new Vibration();
-            rVibe.RightMotorSpeed = speed;
-            csPad.SetVibration(rVibe);
+            Vibration[] rVibe = new Vibration[4];
+            for (int i = 0; i < controllers; i++)
+            {
+                rVibe[i].RightMotorSpeed = speed;
+                csPad[i].SetVibration(rVibe[i]);
+            }
         }
 
     }

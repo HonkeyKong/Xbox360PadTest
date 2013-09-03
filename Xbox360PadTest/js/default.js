@@ -13,9 +13,9 @@
             if (args.detail.previousExecutionState !== activation.ApplicationExecutionState.terminated) {
                 // TODO: This application has been newly launched. Initialize
                 // your application here.
-
-                if (pad.isControllerConnected(0)) document.getElementById("padStatus").innerText = "Xbox 360 Controller detected!";
-                else document.getElementById("padStatus").innerText = "No controller detected.";
+                
+                document.getElementById("padStatus").innerText = pad.initControllers() + " Controller(s) detected!";
+                //else document.getElementById("padStatus").innerText = "No controller detected.";
 
                 
             } else {

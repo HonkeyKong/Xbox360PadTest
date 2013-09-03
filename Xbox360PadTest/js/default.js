@@ -86,6 +86,6 @@ function btnPressed(button) {
         'DPadRight'   : 'RightResult',
     };
 
-    setButtonPressedText(button, Mapping[Button]);
+    setButtonPressedText(button, Mapping[button]);
 
 }

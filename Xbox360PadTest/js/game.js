@@ -32,29 +32,31 @@ getRStickX(), and getRStickY(). These functions return an unsigned short between
 threshold of 10000 is recommended. */
 
 function update(mod) {
-    if ((pad.isPressed("DPadLeft")[0]) || (pad.getLStickX()[0] <= -10000)) { // Left
-        mySprite.x -= mySprite.speed * mod; 
-    }
-    if ((pad.isPressed("DPadUp")[0]) || (pad.getLStickY()[0] >= 10000)) { // Up
-        mySprite.y -= mySprite.speed * mod;
-    }
-    if ((pad.isPressed("DPadRight")[0]) || (pad.getLStickX()[0] >= 10000)) { // Right
-        mySprite.x += mySprite.speed * mod;
-    }
-    if ((pad.isPressed("DPadDown")[0]) || (pad.getLStickY()[0] <= -10000)) { // Down
-        mySprite.y += mySprite.speed * mod;
-    }
-    if (pad.isPressed("A")[0]) { // A Button
-        mySprite.color = '#0c0';
-    }
-    if (pad.isPressed("B")[0]) { // B Button
-        mySprite.color = '#c00';
-    }
-    if (pad.isPressed("X")[0]) { // X Button
-        mySprite.color = '#00c';
-    }
-    if (pad.isPressed("Y")[0]) { // Y Button
-        mySprite.color = '#cc0';
+    if (pad.isConnected()[0]) {
+        if ((pad.isPressed("DPadLeft")[0]) || (pad.getLStickX()[0] <= -10000)) { // Left
+            mySprite.x -= mySprite.speed * mod;
+        }
+        if ((pad.isPressed("DPadUp")[0]) || (pad.getLStickY()[0] >= 10000)) { // Up
+            mySprite.y -= mySprite.speed * mod;
+        }
+        if ((pad.isPressed("DPadRight")[0]) || (pad.getLStickX()[0] >= 10000)) { // Right
+            mySprite.x += mySprite.speed * mod;
+        }
+        if ((pad.isPressed("DPadDown")[0]) || (pad.getLStickY()[0] <= -10000)) { // Down
+            mySprite.y += mySprite.speed * mod;
+        }
+        if (pad.isPressed("A")[0]) { // A Button
+            mySprite.color = '#0c0';
+        }
+        if (pad.isPressed("B")[0]) { // B Button
+            mySprite.color = '#c00';
+        }
+        if (pad.isPressed("X")[0]) { // X Button
+            mySprite.color = '#00c';
+        }
+        if (pad.isPressed("Y")[0]) { // Y Button
+            mySprite.color = '#cc0';
+        }
     }
 }
 

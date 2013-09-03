@@ -14,6 +14,19 @@ namespace Xbox360Pad
         private static Controller[] csPad = new Controller[4];
         private static int controllers = 0;
 
+        public static bool[] isConnected()
+        {
+            bool[] connected = new bool[4] {false, false, false, false};
+            for(int i=0; i<controllers;i++)
+            {
+                if(csPad[i].IsConnected)
+                {
+                    connected[i] = true;
+                } else connected[i] = false;
+            }
+            return connected;
+        }
+
         public static int initControllers()
         {
             for (int i = 0; i < 4; i++)

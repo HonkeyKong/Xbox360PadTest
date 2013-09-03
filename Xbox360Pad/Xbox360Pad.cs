@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SharpDX;
 using SharpDX.XInput;
 
 namespace Xbox360Pad
@@ -10,17 +11,15 @@ namespace Xbox360Pad
     public sealed class Pad
     {
 
-        //public Controller csPad = new Controller(0);
+        private static Controller csPad = new Controller(0);
 
-        public static bool isControllerConnected(int index)
+        public static bool isControllerConnected()
         {
-            Controller csPad = new Controller((UserIndex)index);
             return csPad.IsConnected;
         }
 
-        public static bool isPressed(int index, string button)
+        public static bool isPressed(string button)
         {
-            Controller csPad = new Controller((UserIndex)index);
             int bFlag = 0;
             if (csPad.IsConnected)
             {
@@ -78,46 +77,54 @@ namespace Xbox360Pad
             else return false;
         }
 
-        public static byte getLeftTrigger(int index)
+        public static byte getLeftTrigger()
         {
-            Controller csPad = new Controller((UserIndex)index);
             State csState = csPad.GetState();
             return csState.Gamepad.LeftTrigger;
         }
 
-        public static byte getRightTrigger(int index)
+        public static byte getRightTrigger()
         {
-            Controller csPad = new Controller((UserIndex)index);
             State csState = csPad.GetState();
             return csState.Gamepad.RightTrigger;
         }
 
-        public static short getLStickX(int index)
+        public static short getLStickX()
         {
-            Controller csPad = new Controller((UserIndex)index);
             State csState = csPad.GetState();
             return csState.Gamepad.LeftThumbX;
         }
 
-        public static short getLStickY(int index)
+        public static short getLStickY()
         {
-            Controller csPad = new Controller((UserIndex)index);
             State csState = csPad.GetState();
             return csState.Gamepad.LeftThumbY;
         }
 
-        public static short getRStickX(int index)
+        public static short getRStickX()
         {
-            Controller csPad = new Controller((UserIndex)index);
             State csState = csPad.GetState();
             return csState.Gamepad.RightThumbX;
         }
 
-        public static short getRStickY(int index)
+        public static short getRStickY()
         {
-            Controller csPad = new Controller((UserIndex)index);
             State csState = csPad.GetState();
             return csState.Gamepad.RightThumbY;
+        }
+
+        public static void setLeftVibrate(ushort speed)
+        {
+            Vibration lVibe = new Vibration();
+            lVibe.LeftMotorSpeed = speed;
+            csPad.SetVibration(lVibe);
+        }
+
+        public static void setRightVibrate(ushort speed)
+        {
+            Vibration rVibe = new Vibration();
+            rVibe.RightMotorSpeed = speed;
+            csPad.SetVibration(rVibe);
         }
 
     }

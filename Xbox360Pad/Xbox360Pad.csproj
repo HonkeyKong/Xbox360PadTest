@@ -103,6 +103,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="SharpDX">
+      <HintPath>..\..\SampleApp\SampleComponent\bin\Debug\SharpDX.dll</HintPath>
+    </Reference>
     <Reference Include="SharpDX.XInput">
       <HintPath>..\..\..\..\..\..\..\Program Files\SharpDX\Bin\DirectX11_1-winrt\SharpDX.XInput.dll</HintPath>
     </Reference>

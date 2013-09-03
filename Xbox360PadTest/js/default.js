@@ -44,29 +44,16 @@ function isConnected() {
     return pad.isControllerConnected();
 }
 
-function getLT() {
-    document.getElementById("LTResult").innerText = pad.getLeftTrigger(0);
+function updateGetEl(tagId, triggerName) {
+    document.getElementById(tagId).innerText = pad[triggerName](0);    
 }
 
-function getRT() {
-    document.getElementById("RTResult").innerText = pad.getRightTrigger(0);
-}
-
-function getLSX() {
-    document.getElementById("LStickXResult").innerText = pad.getLStickX(0);
-}
-
-function getLSY() {
-    document.getElementById("LStickYResult").innerText = pad.getLStickY(0);
-}
-
-function getRSX() {
-    document.getElementById("RStickXResult").innerText = pad.getRStickX(0);
-}
-
-function getRSY() {
-    document.getElementById("RStickYResult").innerText = pad.getRStickY(0);
-}
+function getLT()  { updateGetEl('LTResult',      'getLeftTrigger');  }
+function getRT()  { updateGetEl('RTResult',      'getRightTrigger'); }
+function getLSX() { updateGetEl('LStickXResult', 'getLStickX');      }
+function getLSY() { updateGetEl('LStickYResult', 'getLStickY');      }
+function getRSX() { updateGetEl('RStickXResult', 'getRStickX');      }
+function getRSY() { updateGetEl('RStickYResult', 'getRStickY');      }
 
 function vibrateLeft(speed) {
     pad.setLeftVibrate(speed);

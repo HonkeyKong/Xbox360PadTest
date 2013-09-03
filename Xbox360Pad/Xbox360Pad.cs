@@ -86,7 +86,7 @@ namespace Xbox360Pad
                     else pressed[i] = false;
                 }
             }
-            return pressed; // We should never reach this point.
+            return pressed;
         }
 
         public static byte[] getLeftTrigger()
@@ -161,24 +161,18 @@ namespace Xbox360Pad
             return RYState;
         }
 
-        public static void setLeftVibrate(ushort speed)
+        public static void setLeftVibrate(int index, ushort speed)
         {
-            Vibration[] lVibe = new Vibration[4];
-            for (int i = 0; i < controllers; i++)
-            {
-                lVibe[i].LeftMotorSpeed = speed;
-                csPad[i].SetVibration(lVibe[i]);
-            }
+            Vibration lVibe = new Vibration();
+            lVibe.LeftMotorSpeed = speed;
+            csPad[index].SetVibration(lVibe);
         }
 
-        public static void setRightVibrate(ushort speed)
+        public static void setRightVibrate(int index, ushort speed)
         {
-            Vibration[] rVibe = new Vibration[4];
-            for (int i = 0; i < controllers; i++)
-            {
-                rVibe[i].RightMotorSpeed = speed;
-                csPad[i].SetVibration(rVibe[i]);
-            }
+            Vibration rVibe = new Vibration();
+            rVibe.RightMotorSpeed = speed;
+            csPad[index].SetVibration(rVibe);
         }
 
     }

@@ -13,8 +13,8 @@
             if (args.detail.previousExecutionState !== activation.ApplicationExecutionState.terminated) {
                 // TODO: This application has been newly launched. Initialize
                 // your application here.
-                
-                document.getElementById("padStatus").innerText = pad.initControllers() + " Controller(s) detected!";
+                var numControllers = pad.initControllers();
+                document.getElementById("padStatus").innerText = numControllers + " Controller(s) detected!";
                 //else document.getElementById("padStatus").innerText = "No controller detected.";
 
                 
@@ -55,12 +55,12 @@ function getLSY() { updateGetEl('LStickYResult', 'getLStickY');      }
 function getRSX() { updateGetEl('RStickXResult', 'getRStickX');      }
 function getRSY() { updateGetEl('RStickYResult', 'getRStickY');      }
 
-function vibrateLeft(speed) {
-    pad.setLeftVibrate(speed);
+function vibrateLeft(index, speed) {
+    pad.setLeftVibrate(index, speed);
 }
 
-function vibrateRight(speed) {
-    pad.setRightVibrate(speed);
+function vibrateRight(index, speed) {
+    pad.setRightVibrate(index, speed);
 }
 
 function setButtonPressedText(button, tagId) {

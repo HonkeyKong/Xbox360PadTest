@@ -62,51 +62,30 @@ function vibrateLeft(speed) {
 function vibrateRight(speed) {
     pad.setRightVibrate(speed);
 }
-    
-function btnPressed(button) {
-    switch (button) {
-        case "A":
-            document.getElementById("ButtonAResult").innerText = pad.isPressed(button);
-            break;
-        case "B":
-            document.getElementById("ButtonBResult").innerText = pad.isPressed(button);
-            break;
-        case "X":
-            document.getElementById("ButtonXResult").innerText = pad.isPressed(button);
-            break;
-        case "Y":
-            document.getElementById("ButtonYResult").innerText = pad.isPressed(button);
-            break;
-        case "Start":
-            document.getElementById("ButtonStartResult").innerText = pad.isPressed(button);
-            break;
-        case "Back":
-            document.getElementById("ButtonBackResult").innerText = pad.isPressed(button);
-            break;
-        case "LeftBumper":
-            document.getElementById("ButtonLBResult").innerText = pad.isPressed(button);
-            break;
-        case "RightBumper":
-            document.getElementById("ButtonRBResult").innerText = pad.isPressed(button);
-            break;
-        case "LeftClick":
-            document.getElementById("LClickResult").innerText = pad.isPressed(button);
-            break;
-        case "RightClick":
-            document.getElementById("RClickResult").innerText = pad.isPressed(button);
-            break;
-        case "DPadUp":
-            document.getElementById("UpResult").innerText = pad.isPressed(button);
-            break;
-        case "DPadDown":
-            document.getElementById("DownResult").innerText = pad.isPressed(button);
-            break;
-        case "DPadLeft":
-            document.getElementById("LeftResult").innerText = pad.isPressed(button);
-            break;
-        case "DPadRight":
-            document.getElementById("RightResult").innerText = pad.isPressed(button);
-            break;
 
-    }
+function setButtonPressedText(button, tagId) {
+    document.getElementById(tagId).innerText = pad.isPressed(button);
+}
+
+function btnPressed(button) {
+
+    var Mapping = {
+        'A'           : 'ButtonAResult',
+        'B'           : 'ButtonBResult',
+        'X'           : 'ButtonXResult',
+        'Y'           : 'ButtonYResult',
+        'Start'       : 'ButtonStartResult',
+        'Back'        : 'ButtonBackResult',
+        'LeftBumper'  : 'ButtonLBResult',
+        'RightBumper' : 'ButtonRBResult',
+        'LeftClick'   : 'LClickResult',
+        'RightClick'  : 'RClickResult',
+        'DPadUp'      : 'UpResult',
+        'DPadDown'    : 'DownResult',
+        'DPadLeft'    : 'LeftResult',
+        'DPadRight'   : 'RightResult',
+    };
+
+    setButtonPressedText(button, Mapping[Button]);
+
 }

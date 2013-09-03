@@ -14,7 +14,7 @@
     <Resource Language="x-generate" />
   </Resources>
   <Applications>
-    <Application Id="App" StartPage="default.html">
+    <Application Id="App" StartPage="game.html">
       <VisualElements DisplayName="Xbox360PadTest" Logo="images\logo.png" SmallLogo="images\smalllogo.png" Description="Xbox360PadTest" ForegroundText="light" BackgroundColor="#4DEB17">
         <DefaultTile ShowName="allLogos" />
         <SplashScreen Image="images\splashscreen.png" />
